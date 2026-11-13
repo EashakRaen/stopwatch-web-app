@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple, accurate online stopwatch with lap times.">
+    <title>Chronos | Online Stopwatch</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=JetBrains+Mono:wght@500;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Top navigation -->
+    <header class="topbar">
+        <div class="topbar-inner">
+            <a href="#stopwatch" class="logo">Chron<span>os</span></a>
+            <nav aria-label="Main">
+                <a href="#stopwatch">Stopwatch</a>
+                <a href="#how">How to use</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="app" id="stopwatch">
+        <header class="title">
+            <h1>Online Stopwatch</h1>
+            <p>Accurate to 1/100th of a second. Start, pause, reset and record laps.</p>
+        </header>
+
+        <!-- Stopwatch -->
+        <section class="card">
+            <div class="dial" id="dial">
+                <div class="dial-inner">
+                    <div class="readout">
+                        <span id="time">00:00:00</span><span id="centi">.00</span>
+                    </div>
+                    <p id="status">Ready</p>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="lapBtn" class="btn btn-ghost" disabled>Lap</button>
+                <button id="toggleBtn" class="btn btn-start">Start</button>
+                <button id="resetBtn" class="btn btn-ghost" disabled>Reset</button>
+            </div>
+
+            <p class="hint">Shortcuts: <kbd>Space</kbd> start/pause &nbsp; <kbd>L</kbd> lap &nbsp; <kbd>R</kbd> reset</p>
+        </section>
+
+        <!-- Laps -->
+        <section class="card">
+            <h2>Laps</h2>
+            <p id="emptyMsg" class="empty">No laps yet. Press Lap while the stopwatch is running.</p>
+
+            <div class="lap-stats" id="lapStats" hidden>
+                <div><span>Best</span><strong id="bestLap">--</strong></div>
+                <div><span>Average</span><strong id="avgLap">--</strong></div>
+                <div><span>Worst</span><strong id="worstLap">--</strong></div>
+            </div>
+
+            <div class="lap-head" id="lapHead" hidden>
+                <span>Lap</span><span>Lap time</span><span>Total</span>
+            </div>
+            <ol id="lapList"></ol>
+        </section>
+
+        <!-- How to use -->
+        <section class="how" id="how">
+            <h2>How to use</h2>
+            <ol class="how-list">
+                <li><b>1</b><div><h3>Start</h3><p>Press Start or the Space key to begin timing.</p></div></li>
+                <li><b>2</b><div><h3>Record laps</h3><p>Press Lap or L to save a split without stopping the clock.</p></div></li>
+                <li><b>3</b><div><h3>Pause or reset</h3><p>Pause to stop, resume to continue, or Reset to clear everything.</p></div></li>
+            </ol>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Chronos. All rights reserved.</p>
+        <p>Created by Eashak Raen | SkillCraft Technology Internship</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
