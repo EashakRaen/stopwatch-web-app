@@ -1,0 +1,179 @@
+:root {
+    --bg: #0e1116;
+    --card: #161b22;
+    --track: #262d38;
+    --line: #232a35;
+    --text: #e8edf2;
+    --muted: #8b96a3;
+    --accent: #2ee6c5;
+    --start: #2ee6c5;
+    --pause: #ffb020;
+    --good: #3ddc84;
+    --bad: #ff5d6c;
+    --head: "Bricolage Grotesque", system-ui, sans-serif;
+    --body: "Instrument Sans", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--body);
+    background: radial-gradient(circle at 50% -10%, #16303a 0%, var(--bg) 55%);
+    color: var(--text);
+    line-height: 1.5;
+}
+
+.app {
+    width: min(520px, 92%);
+    margin: 0 auto;
+    padding: 3rem 0 2rem;
+    display: grid;
+    gap: 1.4rem;
+    flex: 1;
+}
+
+.title { text-align: center; }
+.title h1 { font: 800 clamp(2rem, 6vw, 2.8rem) var(--head); letter-spacing: -0.02em; }
+.title p { color: var(--muted); margin-top: .3rem; }
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 2rem 1.6rem;
+    box-shadow: 0 20px 50px -25px rgba(0, 0, 0, .7);
+}
+
+/* Dial */
+.dial {
+    --deg: 0deg;
+    width: min(300px, 78vw);
+    aspect-ratio: 1;
+    margin: 0 auto 2rem;
+    padding: 10px;
+    border-radius: 50%;
+    display: grid;
+    background: conic-gradient(var(--accent) var(--deg), var(--track) 0);
+    transition: filter .3s;
+}
+.dial.running { filter: drop-shadow(0 0 14px rgba(46, 230, 197, .35)); }
+
+.dial-inner {
+    border-radius: 50%;
+    background: var(--card);
+    display: grid;
+    place-content: center;
+    text-align: center;
+}
+
+.readout { font-family: var(--mono); font-weight: 700; font-size: clamp(1.6rem, 7vw, 2.2rem); letter-spacing: -0.02em; }
+#centi { color: var(--accent); font-size: .65em; }
+#status { color: var(--muted); font-size: .9rem; text-transform: uppercase; letter-spacing: .12em; margin-top: .3rem; }
+
+/* Buttons */
+.controls { display: flex; justify-content: center; gap: .9rem; }
+
+.btn {
+    min-width: 96px;
+    padding: .85rem 1.4rem;
+    font: 600 1rem var(--body);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform .15s, background .2s, opacity .2s, border-color .2s;
+}
+.btn:hover:not(:disabled) { transform: translateY(-2px); }
+.btn:active:not(:disabled) { transform: scale(.97); }
+.btn:disabled { opacity: .35; cursor: not-allowed; }
+
+.btn-start { background: var(--start); color: #06201b; }
+.btn-pause { background: var(--pause); color: #2b1d00; }
+.btn-ghost { background: transparent; color: var(--text); border-color: #3a4352; }
+.btn-ghost:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+.hint { text-align: center; color: var(--muted); font-size: .85rem; margin-top: 1.4rem; }
+kbd { font-family: var(--mono); background: var(--track); padding: .1rem .45rem; border-radius: 6px; font-size: .8rem; color: var(--text); }
+
+/* Laps */
+.card h2 { font: 700 1.3rem var(--head); margin-bottom: 1rem; }
+.empty { color: var(--muted); font-size: .95rem; }
+
+.lap-head, #lapList li {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: .7rem .3rem;
+    font-family: var(--mono);
+    font-size: .95rem;
+}
+.lap-head { color: var(--muted); font: 500 .8rem var(--body); text-transform: uppercase; letter-spacing: .08em; border-bottom: 1px solid var(--line); }
+.lap-head span:not(:first-child), #lapList li span:not(:first-child) { text-align: right; }
+
+#lapList { list-style: none; max-height: 320px; overflow-y: auto; }
+#lapList li { border-bottom: 1px solid var(--line); }
+#lapList li.best { color: var(--good); }
+#lapList li.worst { color: var(--bad); }
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 1.6rem 4%;
+    color: var(--muted);
+    font-size: .9rem;
+    border-top: 1px solid var(--line);
+}
+
+@media (max-width: 400px) {
+    .controls { gap: .5rem; }
+    .btn { min-width: 84px; padding: .8rem 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+}/* ---------- Professional upgrade ---------- */
+body { padding-top: 64px; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+/* Fixed top bar */
+.topbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    background: rgba(14, 17, 22, .85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+}
+.topbar-inner {
+    width: min(960px, 92%); height: 64px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+}
+.logo { font: 800 1.4rem var(--head); letter-spacing: -0.03em; color: var(--text); text-decoration: none; }
+.logo span { color: var(--accent); }
+.topbar nav { display: flex; gap: .3rem; }
+.topbar nav a {
+    color: var(--muted); text-decoration: none; font-weight: 500;
+    padding: .45rem .9rem; border-radius: 999px;
+    transition: color .2s, background .2s;
+}
+.topbar nav a:hover { color: var(--text); background: rgba(255, 255, 255, .08); }
+
+/* Lap summary */
+.lap-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: .7rem; margin-bottom: 1rem; }
+.lap-stats div { background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: .7rem .5rem; text-align: center; }
+.lap-stats span { display: block; color: var(--muted); font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; }
+.lap-stats strong { font: 700 1rem var(--mono); }
+#bestLap { color: var(--good); }
+#worstLap { color: var(--bad); }
+
+/* How to use */
+.how { margin-top: .6rem; }
+.how h2 { font: 700 1.5rem var(--head); margin-bottom: 1rem; text-align: center; }
+.how-list { list-style: none; display: grid; gap: .8rem; }
+.how-list li { display: flex; gap: 1rem; align-items: flex-start; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 1.1rem 1.2rem; }
+.how-list b { flex: none; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: rgba(46, 230, 197, .15); color: var(--accent); font-family: var(--mono); }
+.how-list h3 { font: 600 1.05rem var(--body); }
+.how-list p { color: var(--muted); font-size: .95rem; }
+[hidden] { display: none !important; }
